@@ -1,3 +1,8 @@
+//check if dom is ready
+document.addEventListener('DOMContentLoaded', function () {
+      
+
+
 //array definition with all cards
 var cards = [
 '<li class="card open show"><i class="fa fa-diamond"></i></li>',
@@ -21,8 +26,10 @@ var cards = [
 //initial card shuffle at page load
 shuffle(cards);
 
+console.log(document.getElementsByClassName("deck"));
 //display initial shuffled cards on page
-document.getElementById("deck").innerHTML = cards.join("");
+document.getElementsByClassName("deck")[0].innerHTML = cards.join("");
+
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -50,4 +57,12 @@ function shuffle(array) {
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ var el = document.querySelectorAll('.card');
+console.log(el);
+document.addEventListener("click", function(){ alert("Hello World!"); }); 
  */
+
+
+
+
+});
