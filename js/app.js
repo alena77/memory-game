@@ -5,22 +5,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	//array definition with all cards
 	var cards = [
-	'<li class="card open show"><i class="fa fa-diamond"></i></li>',
-	'<li class="card open show"><i class="fa fa-paper-plane-o"></i></li>',
+	'<li class="card"><i class="fa fa-diamond"></i></li>',
+	'<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
 	'<li class="card match"><i class="fa fa-anchor"></i></li>',
-	'<li class="card open show"><i class="fa fa-bolt"></i></li>',
-	'<li class="card open show"><i class="fa fa-cube"></i></li>',
+	'<li class="card"><i class="fa fa-bolt"></i></li>',
+	'<li class="card"><i class="fa fa-cube"></i></li>',
 	'<li class="card match"><i class="fa fa-anchor"></i></li>',
-	'<li class="card open show"><i class="fa fa-leaf"></i></li>',
-	'<li class="card open show"><i class="fa fa-bicycle"></i></li>',
-	'<li class="card open show"><i class="fa fa-diamond"></i></li>',
-	'<li class="card open show"><i class="fa fa-bomb"></i></li>',
-	'<li class="card open show"><i class="fa fa-leaf"></i></li>',
-	'<li class="card open show"><i class="fa fa-bomb"></i></li>',
-	'<li class="card open show"><i class="fa fa-bolt"></i></li>',
-	'<li class="card open show"><i class="fa fa-bicycle"></i></li>',
-	'<li class="card open show"><i class="fa fa-paper-plane-o"></i></li>',
-	'<li class="card open show"><i class="fa fa-cube"></i></li>'
+	'<li class="card"><i class="fa fa-leaf"></i></li>',
+	'<li class="card"><i class="fa fa-bicycle"></i></li>',
+	'<li class="card"><i class="fa fa-diamond"></i></li>',
+	'<li class="card"><i class="fa fa-bomb"></i></li>',
+	'<li class="card"><i class="fa fa-leaf"></i></li>',
+	'<li class="card"><i class="fa fa-bomb"></i></li>',
+	'<li class="card"><i class="fa fa-bolt"></i></li>',
+	'<li class="card"><i class="fa fa-bicycle"></i></li>',
+	'<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
+	'<li class="card"><i class="fa fa-cube"></i></li>'
 	];
 
 	//initial card shuffle at page load
@@ -67,7 +67,20 @@ document.addEventListener('DOMContentLoaded', function () {
 	//function called when card is clicked
 	function respondToTheClick(evt) {
 		if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
-        	console.log('A cardEl was clicked: ' + evt.target.textContent);
+        	console.log('A card was clicked: ' + evt.target);
+        	
+        	//call flip function
+        	flip(evt);
+
     	}
+	}
+
+	//function flipping cards
+	function flip(evt){
+		//next line plays tink sound at 
+        document.querySelector(".tink").play();
+        //next 2 lines add class open + show
+		evt.target.classList.toggle('open');
+        evt.target.classList.toggle('show');
 	}
 });
