@@ -88,10 +88,9 @@ document.addEventListener('DOMContentLoaded', function () {
         			score=score+2;
         			flip(curCard);
         			flip(prevCard);
-        			matchCard(curCard);
-        			matchCard(prevCard);
-        			//next line plays boom sound
-        			document.querySelector(".tink").play();
+        			matchCard(curCard,prevCard);
+
+
         		//explode unmatched pair
         		}else{
         			//shake cards before exploding
@@ -116,6 +115,8 @@ document.addEventListener('DOMContentLoaded', function () {
         		//check for win
         		if(score===14){
         			console.log("YOU WIN!!!");
+        			//call win function
+        			win();
         		}	
         	}
     	}
@@ -136,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	//function flipping cards
 	function flip(curCard){
-		
         //next 2 lines add class open + show
 		curCard.classList.toggle('open');
         curCard.classList.toggle('show');
@@ -144,9 +144,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 	//function matching cards
-	function matchCard(curCard){
+	function matchCard(curCard,prevCard){
 		console.log("match cards function was called");
 		curCard.classList.add('match');
+		prevCard.classList.add('match');
+		//next line plays tink sound
+        document.querySelector(".tink").play();
 	}
 
 	//function exploding cards
