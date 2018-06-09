@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	'<li class="card"><i class="fa fa-cube"></i></li>'
 	];
 
+	var count=1;
+	var score=0;
+
 	//initial card shuffle at page load
 	shuffle(cards);
 
@@ -67,20 +70,70 @@ document.addEventListener('DOMContentLoaded', function () {
 	//function called when card is clicked
 	function respondToTheClick(evt) {
 		if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
-        	console.log('A card was clicked: ' + evt.target);
+			//define current card
+			var cCard= evt.target;
+        	//check if card is already open or matched
+        	if (cCard.classList.contains('open') || cCard.classList.contains('match')){
+        		console.log("card is already open");
+        		//next line plays clap sound
+        		document.querySelector(".clap").play();
+
+        	//open card if first in pair of cards
+        	}else if(count%2==1){
+        		//call flip function
+        		count++;
+        		flip(cCard);
+        		//next line plays tink sound
+        		document.querySelector(".tink").play();
+
+        	//open card if second in pair, but check for winning and matching conditions
+        	}else{
+        		//call flip function
+        		count++;
+        		flip(cCard);
+
+        		//check for win!
+        		if(score===14){
+        			console.log("YOU WIN!!!");
+
+        		//check for match
+        		}else if(1==1){
+        			score=score+2;
+        			matchC();
+
+        		//explode unmatched pair
+        		}else{
+        			explode();
+        		}
+
+
+        		//next line plays tink sound
+        		document.querySelector(".boom").play();
+        		
+        		
+        	}
+
         	
-        	//call flip function
-        	flip(evt);
 
     	}
 	}
 
 	//function flipping cards
-	function flip(evt){
-		//next line plays tink sound at 
-        document.querySelector(".tink").play();
+	function flip(cCard){
+		
         //next 2 lines add class open + show
-		evt.target.classList.toggle('open');
-        evt.target.classList.toggle('show');
+		cCard.classList.toggle('open');
+        cCard.classList.toggle('show');
+	}
+
+
+	//function matching cards
+	function matchC(){
+		console.log("match cards function was called");
+	}
+
+	//function exploding cards
+	function explode(){
+		console.log("explode cards function was called");
 	}
 });
