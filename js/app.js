@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	var count=1;
 	var score=0;
+	var prevCard;
 
 	//initial card shuffle at page load
 	shuffle(cards);
@@ -71,9 +72,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	function respondToTheClick(evt) {
 		if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
 			//define current card
-			var cCard= evt.target;
+			var curCard= evt.target;
         	//check if card is already open or matched
-        	if (cCard.classList.contains('open') || cCard.classList.contains('match')){
+        	if (curCard.classList.contains('open') || curCard.classList.contains('match')){
         		console.log("card is already open");
         		//next line plays clap sound
         		document.querySelector(".clap").play();
@@ -82,33 +83,42 @@ document.addEventListener('DOMContentLoaded', function () {
         	}else if(count%2==1){
         		//call flip function
         		count++;
-        		flip(cCard);
+        		flip(curCard);
         		//next line plays tink sound
         		document.querySelector(".tink").play();
+
+        		//save first card in pair to later compare to second card
+        		prevCard=curCard;
+        		
 
         	//open card if second in pair, but check for winning and matching conditions
         	}else{
         		//call flip function
         		count++;
-        		flip(cCard);
+        		flip(curCard);
 
         		//check for win!
-        		if(score===14){
-        			console.log("YOU WIN!!!");
-
-        		//check for match
-        		}else if(1==1){
+        		if(prevCard.innerHTML==curCard.innerHTML){
         			score=score+2;
-        			matchC();
-
+        			flip(curCard);
+        			flip(prevCard);
+        			matchCard(curCard);
+        			matchCard(prevCard);
+        			//next line plays boom sound
+        			document.querySelector(".boom").play();
         		//explode unmatched pair
         		}else{
         			explode();
+        			//next line plays boom sound
+        			document.querySelector(".boom").play();
         		}
 
+        		//check for win
+        		if(score===14){
+        			console.log("YOU WIN!!!");
+        		}
 
-        		//next line plays tink sound
-        		document.querySelector(".boom").play();
+        		
         		
         		
         	}
@@ -119,17 +129,18 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	//function flipping cards
-	function flip(cCard){
+	function flip(curCard){
 		
         //next 2 lines add class open + show
-		cCard.classList.toggle('open');
-        cCard.classList.toggle('show');
+		curCard.classList.toggle('open');
+        curCard.classList.toggle('show');
 	}
 
 
 	//function matching cards
-	function matchC(){
+	function matchCard(curCard){
 		console.log("match cards function was called");
+		curCard.classList.add('match');
 	}
 
 	//function exploding cards
