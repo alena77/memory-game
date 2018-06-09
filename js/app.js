@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         		}
 
         		//check for win
-        		if(score===16){
+        		if(score===2){
         			//call win function
         			win();
         		}	
@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	//function win
 	function win(){
     	console.log("YOU WIN!!!");
+    	modal.style.display = "block";
 	}
 
 	//function explode
@@ -165,4 +166,24 @@ document.addEventListener('DOMContentLoaded', function () {
 			document.querySelector(".clap").play();
 		}, 1000)
 	}
+
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on "play again button" close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// close modal when user clicks outside of it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
+
+
 });
