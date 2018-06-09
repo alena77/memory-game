@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	var cards = [
 	'<li class="card"><i class="fa fa-diamond"></i></li>',
 	'<li class="card"><i class="fa fa-paper-plane-o"></i></li>',
-	'<li class="card match"><i class="fa fa-anchor"></i></li>',
+	'<li class="card"><i class="fa fa-anchor"></i></li>',
 	'<li class="card"><i class="fa fa-bolt"></i></li>',
 	'<li class="card"><i class="fa fa-cube"></i></li>',
-	'<li class="card match"><i class="fa fa-anchor"></i></li>',
+	'<li class="card"><i class="fa fa-anchor"></i></li>',
 	'<li class="card"><i class="fa fa-leaf"></i></li>',
 	'<li class="card"><i class="fa fa-bicycle"></i></li>',
 	'<li class="card"><i class="fa fa-diamond"></i></li>',
@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function () {
         		flip(curCard);
         		//next line plays tink sound
         		document.querySelector(".tink").play();
-
         		//save first card in pair to later compare to second card
         		prevCard=curCard;
         		
@@ -85,36 +84,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         		//check for match
         		if(prevCard.innerHTML==curCard.innerHTML){
-        			score=score+2;
-        			flip(curCard);
-        			flip(prevCard);
         			matchCard(curCard,prevCard);
-
 
         		//explode unmatched pair
         		}else{
-        			//shake cards before exploding
-        			setTimeout(function() {
-					  explode(curCard,prevCard);
-					},0)
-					setTimeout(function() {
-					  explode(curCard,prevCard);
-					}, 1000)
-
-
-        			//explode cards using flip function
-        			setTimeout(function() {
-						flip(curCard); // runs first
-						flip(prevCard); // runs second
-						//play clap sound
-        				document.querySelector(".clap").play();
-					}, 1000)
-        			
+        			explode(curCard,prevCard);
         		}
 
         		//check for win
-        		if(score===14){
-        			console.log("YOU WIN!!!");
+        		if(score===16){
         			//call win function
         			win();
         		}	
@@ -146,18 +124,45 @@ document.addEventListener('DOMContentLoaded', function () {
 	//function matching cards
 	function matchCard(curCard,prevCard){
 		console.log("match cards function was called");
+		flip(curCard);
+        flip(prevCard);
 		curCard.classList.add('match');
 		prevCard.classList.add('match');
 		//next line plays tink sound
         document.querySelector(".tink").play();
+        score=score+2;	
 	}
 
-	//function exploding cards
-	function explode(curCard, prevCard){
-		console.log("explode cards function was called");
+	//function shaking cards
+	function shake(curCard, prevCard){
         //next 2 lines add class explode
 		curCard.classList.toggle('explode');
-		prevCard.classList.toggle('explode');
-		
+		prevCard.classList.toggle('explode');	
+	}
+
+	//function win
+	function win(){
+    	console.log("YOU WIN!!!");
+	}
+
+	//function explode
+	function explode(curCard,prevCard){
+    	console.log("explode function was colled");
+		//shake cards before exploding
+		setTimeout(function() {
+		  shake(curCard,prevCard);
+		},0)
+		setTimeout(function() {
+		  shake(curCard,prevCard);
+		}, 1000)
+
+
+		//hide cards using flip function
+		setTimeout(function() {
+			flip(curCard);
+			flip(prevCard);
+			//play clap sound
+			document.querySelector(".clap").play();
+		}, 1000)
 	}
 });
