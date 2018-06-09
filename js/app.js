@@ -30,26 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	//initial card shuffle at page load
 	shuffle(cards);
 
-	console.log(document.getElementsByClassName("deck"));
 	//display initial shuffled cards on page
 	document.getElementsByClassName("deck")[0].innerHTML = cards.join("");
 
 
 
-	// Shuffle function from http://stackoverflow.com/a/2450976
-	function shuffle(array) {
-	    var currentIndex = array.length, temporaryValue, randomIndex;
 
-	    while (currentIndex !== 0) {
-	        randomIndex = Math.floor(Math.random() * currentIndex);
-	        currentIndex -= 1;
-	        temporaryValue = array[currentIndex];
-	        array[currentIndex] = array[randomIndex];
-	        array[randomIndex] = temporaryValue;
-	    }
-
-	    return array;
-	}
 
 
 	/*
@@ -76,8 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
         	//check if card is already open or matched
         	if (curCard.classList.contains('open') || curCard.classList.contains('match')){
         		console.log("card is already open");
-        		//next line plays clap sound
-        		document.querySelector(".clap").play();
+        		//next line plays boom sound
+        		document.querySelector(".boom").play();
 
         	//open card if first in pair of cards
         	}else if(count%2==1){
@@ -97,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         		count++;
         		flip(curCard);
 
-        		//check for win!
+        		//check for match
         		if(prevCard.innerHTML==curCard.innerHTML){
         			score=score+2;
         			flip(curCard);
@@ -105,27 +91,47 @@ document.addEventListener('DOMContentLoaded', function () {
         			matchCard(curCard);
         			matchCard(prevCard);
         			//next line plays boom sound
-        			document.querySelector(".boom").play();
+        			document.querySelector(".tink").play();
         		//explode unmatched pair
         		}else{
-        			explode();
-        			//next line plays boom sound
-        			document.querySelector(".boom").play();
+        			//shake cards before exploding
+        			setTimeout(function() {
+					  explode(curCard,prevCard);
+					},0)
+					setTimeout(function() {
+					  explode(curCard,prevCard);
+					}, 1000)
+
+
+        			//explode cards using flip function
+        			setTimeout(function() {
+						flip(curCard); // runs first
+						flip(prevCard); // runs second
+						//play clap sound
+        				document.querySelector(".clap").play();
+					}, 1000)
+        			
         		}
 
         		//check for win
         		if(score===14){
         			console.log("YOU WIN!!!");
-        		}
-
-        		
-        		
-        		
+        		}	
         	}
-
-        	
-
     	}
+	}
+
+	// Shuffle function from http://stackoverflow.com/a/2450976
+	function shuffle(array) {
+	    var currentIndex = array.length, temporaryValue, randomIndex;
+	    while (currentIndex !== 0) {
+	        randomIndex = Math.floor(Math.random() * currentIndex);
+	        currentIndex -= 1;
+	        temporaryValue = array[currentIndex];
+	        array[currentIndex] = array[randomIndex];
+	        array[randomIndex] = temporaryValue;
+	    }
+	    return array;
 	}
 
 	//function flipping cards
@@ -144,7 +150,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	//function exploding cards
-	function explode(){
+	function explode(curCard, prevCard){
 		console.log("explode cards function was called");
+        //next 2 lines add class explode
+		curCard.classList.toggle('explode');
+		prevCard.classList.toggle('explode');
+		
 	}
 });
