@@ -34,10 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	document.getElementsByClassName("deck")[0].innerHTML = cards.join("");
 
 
-
-
-
-
 	/*
 	 * set up the event listener for a card. If a card is clicked:
 	 *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -143,6 +139,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	//function win
 	function win(){
     	console.log("YOU WIN!!!");
+    	var winMessage = document.querySelector('.message');
+    	winMessage.append(
+    		`You won with ${count-1} moves!`
+    		);
+
     	modal.style.display = "block";
 	}
 
@@ -171,10 +172,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	var modal = document.getElementById('myModal');
 
 	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[0];
+	var playAgain = document.getElementsByClassName("close")[0];
 
 	// When the user clicks on "play again button" close the modal
-	span.onclick = function() {
+	playAgain.onclick = function() {
 	    modal.style.display = "none";
 	}
 

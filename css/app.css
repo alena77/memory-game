@@ -163,15 +163,17 @@ h1 {
 
 /* Play again Button */
 .close {
-    color: #aaaaaa;
-    background-color: blue;
+    background: #02b3e4;
+    border-radius: 10px;
     float: center;
     font-size: 28px;
     font-weight: bold;
+    padding: 10px;
 }
 
 .close:hover,
 .close:focus {
+    box-shadow: 5px 2px 20px 0 rgba(0, 0, 73, 0.5);
     color: #000;
     text-decoration: none;
     cursor: pointer;
