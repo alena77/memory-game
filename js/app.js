@@ -153,6 +153,17 @@ document.addEventListener('DOMContentLoaded', function () {
 	function moveNum(){
     	var move = document.querySelector('.moves');
     	move.innerHTML=(count-1)/2 +" moves";
+
+    	//display star rating
+    	var starsD = document.querySelector('.stars');
+    	console.log(starsD);
+    	if(count>35){
+    		starsD.innerHTML=`<li><i class="fa fa-star"></i></li>`;
+    	}else if(count>25){
+    		starsD.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>`;
+    	}else{
+    		starsD.innerHTML=`</li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li>`;
+    	}
 	}
 
 
