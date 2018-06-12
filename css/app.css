@@ -38,10 +38,8 @@ h1 {
  */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
     background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    padding: 2%;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -52,8 +50,10 @@ h1 {
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
+    height: 21%;
+    width: 21%;
+    height: 0;
+    padding-bottom: 21%;
     background: #2e3d49;
     font-size: 0;
     color: #ffffff;
@@ -85,6 +85,30 @@ h1 {
     background: #02ccba;
     font-size: 33px;
 }
+
+
+/*
+ * Styles for flex box
+ */
+.card{
+    margin: 2%;
+}
+i{
+    padding-top: 90%;
+}
+@media screen and (min-width: 660px) {
+  .deck{
+  width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+  } 
+}
+@media screen and (max-width: 659px) {
+  .deck{
+  width: 100%;
+  } 
+}
+
 
 /*
  * Styles for the Score Panel

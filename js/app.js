@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         		}
 
         		//check for win
-        		if(score===2){
+        		if(score===16){
         			//call win function
         			win();
         		}	
