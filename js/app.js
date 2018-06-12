@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
     	modal.style.display = "block";
 	}
 
-	//function win
+	//function moveNumber and star rating
 	function moveNum(){
     	var move = document.querySelector('.moves');
     	move.innerHTML=(count-1)/2 +" moves";
@@ -165,14 +165,6 @@ document.addEventListener('DOMContentLoaded', function () {
     		starsD.innerHTML=`</li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li>`;
     	}
 	}
-
-
-
-
-
-
-
-
 
 	//function explode
 	function explode(curCard,prevCard){
@@ -198,13 +190,25 @@ document.addEventListener('DOMContentLoaded', function () {
 	// Get the modal
 	var modal = document.getElementById('myModal');
 
-	// Get the <span> element that closes the modal
+	// Get the play again! <span> element that closes the modal
 	var playAgain = document.getElementsByClassName("close")[0];
 
-	// When the user clicks on "play again button" close the modal
+	// When the user clicks on "play again button" close the modal and reload page
 	playAgain.onclick = function() {
 	    modal.style.display = "none";
+	    window.location.reload();
 	}
+
+	// Get restart element
+	var restart = document.getElementsByClassName("restart")[0];
+
+	// restart when refresh/restart arrow is clicked
+	restart.onclick = function() {
+	    window.location.reload();
+	}
+
+
+
 
 	// close modal when user clicks outside of it
 	window.onclick = function(event) {
