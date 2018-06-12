@@ -77,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function () {
         		//call flip function
         		count++;
         		flip(curCard);
+        		//update number of moves
+        		moveNum();
 
         		//check for match
         		if(prevCard.innerHTML==curCard.innerHTML){
@@ -141,11 +143,25 @@ document.addEventListener('DOMContentLoaded', function () {
     	console.log("YOU WIN!!!");
     	var winMessage = document.querySelector('.message');
     	winMessage.append(
-    		`You won with ${count-1} moves!`
+    		`You won with ${(count-1)/2} moves!`
     		);
 
     	modal.style.display = "block";
 	}
+
+	//function win
+	function moveNum(){
+    	var move = document.querySelector('.moves');
+    	move.innerHTML=(count-1)/2 +" moves";
+	}
+
+
+
+
+
+
+
+
 
 	//function explode
 	function explode(curCard,prevCard){
