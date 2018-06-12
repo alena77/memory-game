@@ -158,9 +158,9 @@ document.addEventListener('DOMContentLoaded', function () {
     	var starsD = document.querySelector('.stars');
     	console.log(starsD);
     	if(count>35){
-    		starsD.innerHTML=`<li><i class="fa fa-star"></i></li>`;
+    		starsD.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star-o"></i></li><li><i class="fa fa-star-o"></i></li>`;
     	}else if(count>25){
-    		starsD.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>`;
+    		starsD.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star-o"></i></li>`;
     	}else{
     		starsD.innerHTML=`</li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li>`;
     	}
@@ -206,9 +206,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	restart.onclick = function() {
 	    window.location.reload();
 	}
-
-
-
 
 	// close modal when user clicks outside of it
 	window.onclick = function(event) {
