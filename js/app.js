@@ -26,6 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	var count=1;
 	var score=0;
 	var prevCard;
+	var startTime;
+	var endTime;
+	var seconds;
 
 	//initial card shuffle at page load
 	shuffle(cards);
@@ -53,6 +56,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	//function called when card is clicked
 	function respondToTheClick(evt) {
 		if (evt.target.nodeName === 'LI') {  // ← verifies target is desired element
+
+			// Set starting time (first flipped card in game)
+			if(count==1){	
+				startTime = new Date().getTime();
+				console.log("timer started");
+				clockT(startTime);
+			}
+			
+
 			//define current card
 			var curCard= evt.target;
         	//check if card is already open or matched
@@ -141,10 +153,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	//function win
 	function win(){
     	console.log("YOU WIN!!!");
+    	endTime=seconds;
     	var winMessage = document.querySelector('.message');
-    	winMessage.append(
-    		`You won with ${(count-1)/2} moves!`
-    		);
+    	var wMessage =`Good Job!!!  You won with ${((count-1)/2)} moves! Your time was ${endTime} seconds.`;
+
+    	winMessage.innerHTML=wMessage;
 
     	modal.style.display = "block";
 	}
@@ -156,10 +169,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     	//display star rating
     	var starsD = document.querySelector('.stars');
-    	console.log(starsD);
     	if(count>35){
     		starsD.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star-o"></i></li><li><i class="fa fa-star-o"></i></li>`;
-    	}else if(count>25){
+    	}else if(count>27){
     		starsD.innerHTML=`<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star-o"></i></li>`;
     	}else{
     		starsD.innerHTML=`</li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li></li><li><i class="fa fa-star"></i></li>`;
@@ -214,5 +226,26 @@ document.addEventListener('DOMContentLoaded', function () {
 	    }
 	}
 
+	//clock function
+	function clockT(startTime){
+		// Update the count down every 1 second
+		var x = setInterval(function() {
+		    // Get todays date and time
+		    var now = new Date().getTime(); 
+		    // Find the distance between now an the count down date
+		    var distance = now -startTime; 
+		    // Time calculations for days, hours, minutes and seconds
+		    seconds = Math.floor(distance  / 1000); 
+		    // Output the result in an element with id="clock"
+		    document.getElementById("clock").innerHTML = "Your time is: " + seconds + "s";
+
+		    // If game is won
+			if (score == 16) {
+			  	clearInterval(x);
+			  	document.getElementById("clock").innerHTML = "Your time is: "+endTime+"s";
+			  	console.log(endTime);
+			}
+		}, 1000);
+	}
 
 });
